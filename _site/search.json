@@ -40,5 +40,12 @@
     "title": "Basketball Insights",
     "section": "About",
     "text": "About\nThe project uses a Quarto website structure to make it easy to share interactive reports and visualizations."
+  },
+  {
+    "objectID": "index.html#publish",
+    "href": "index.html#publish",
+    "title": "Basketball Insights",
+    "section": "Publish",
+    "text": "Publish\nThis website is configured for GitHub Pages deployment from the _site/ output folder using GitHub Actions."
   }
 ]

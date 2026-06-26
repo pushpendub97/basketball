@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "scores.html",
+    "href": "scores.html",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "",
+    "text": "This document loads historical basketball game records using R and the tidyverse library.\n\n\nRows: 73,279\nColumns: 23\n$ gameId           &lt;dbl&gt; 42500405, 42500404, 42500403, 42500402, 42500401, 425…\n$ gameDateTimeEst  &lt;dttm&gt; 2026-06-13 20:30:00, 2026-06-10 20:30:00, 2026-06-08…\n$ hometeamCity     &lt;chr&gt; \"San Antonio\", \"New York\", \"New York\", \"San Antonio\",…\n$ hometeamName     &lt;chr&gt; \"Spurs\", \"Knicks\", \"Knicks\", \"Spurs\", \"Spurs\", \"Thund…\n$ hometeamId       &lt;dbl&gt; 1610612759, 1610612752, 1610612752, 1610612759, 16106…\n$ awayteamCity     &lt;chr&gt; \"New York\", \"San Antonio\", \"San Antonio\", \"New York\",…\n$ awayteamName     &lt;chr&gt; \"Knicks\", \"Spurs\", \"Spurs\", \"Knicks\", \"Knicks\", \"Spur…\n$ awayteamId       &lt;dbl&gt; 1610612752, 1610612759, 1610612759, 1610612752, 16106…\n$ homeScore        &lt;dbl&gt; 90, 107, 111, 104, 95, 103, 118, 127, 93, 103, 108, 1…\n$ awayScore        &lt;dbl&gt; 94, 106, 115, 105, 105, 111, 91, 114, 130, 82, 121, 1…\n$ winner           &lt;dbl&gt; 1610612752, 1610612752, 1610612759, 1610612752, 16106…\n$ gameType         &lt;chr&gt; \"Playoffs\", \"Playoffs\", \"Playoffs\", \"Playoffs\", \"Play…\n$ gameSubtype      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ gameLabel        &lt;chr&gt; \"NBA Finals\", \"NBA Finals\", \"NBA Finals\", \"NBA Finals…\n$ gameSubLabel     &lt;chr&gt; \"Game 5\", \"Game 4\", \"Game 3\", \"Game 2\", \"Game 1\", \"Ga…\n$ seriesGameNumber &lt;chr&gt; \"Game 5\", \"Game 4\", \"Game 3\", \"Game 2\", \"Game 1\", \"Ga…\n$ attendance       &lt;dbl&gt; 18984, 19812, 19812, 19014, 18835, 18203, 19066, 1820…\n$ arenaId          &lt;dbl&gt; 1000118, 30, 30, 1000118, 1000118, 1000052, 1000118, …\n$ arenaName        &lt;chr&gt; \"Frost Bank Center\", \"Madison Square Garden\", \"Madiso…\n$ arenaCity        &lt;chr&gt; \"San Antonio\", \"New York\", \"New York\", \"San Antonio\",…\n$ arenaState       &lt;chr&gt; \"TX\", \"NY\", \"NY\", \"TX\", \"TX\", \"OK\", \"TX\", \"OK\", \"OH\",…\n$ officials        &lt;chr&gt; \"James Capers, Scott Foster, Mitchell Ervin, Tyler Fo…\n$ gameDate         &lt;dttm&gt; 2026-06-13 20:30:00, 2026-06-10 20:30:00, 2026-06-08…"
+  },
+  {
+    "objectID": "scores.html#setup-data-loading",
+    "href": "scores.html#setup-data-loading",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "",
+    "text": "This document loads historical basketball game records using R and the tidyverse library.\n\n\nRows: 73,279\nColumns: 23\n$ gameId           &lt;dbl&gt; 42500405, 42500404, 42500403, 42500402, 42500401, 425…\n$ gameDateTimeEst  &lt;dttm&gt; 2026-06-13 20:30:00, 2026-06-10 20:30:00, 2026-06-08…\n$ hometeamCity     &lt;chr&gt; \"San Antonio\", \"New York\", \"New York\", \"San Antonio\",…\n$ hometeamName     &lt;chr&gt; \"Spurs\", \"Knicks\", \"Knicks\", \"Spurs\", \"Spurs\", \"Thund…\n$ hometeamId       &lt;dbl&gt; 1610612759, 1610612752, 1610612752, 1610612759, 16106…\n$ awayteamCity     &lt;chr&gt; \"New York\", \"San Antonio\", \"San Antonio\", \"New York\",…\n$ awayteamName     &lt;chr&gt; \"Knicks\", \"Spurs\", \"Spurs\", \"Knicks\", \"Knicks\", \"Spur…\n$ awayteamId       &lt;dbl&gt; 1610612752, 1610612759, 1610612759, 1610612752, 16106…\n$ homeScore        &lt;dbl&gt; 90, 107, 111, 104, 95, 103, 118, 127, 93, 103, 108, 1…\n$ awayScore        &lt;dbl&gt; 94, 106, 115, 105, 105, 111, 91, 114, 130, 82, 121, 1…\n$ winner           &lt;dbl&gt; 1610612752, 1610612752, 1610612759, 1610612752, 16106…\n$ gameType         &lt;chr&gt; \"Playoffs\", \"Playoffs\", \"Playoffs\", \"Playoffs\", \"Play…\n$ gameSubtype      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ gameLabel        &lt;chr&gt; \"NBA Finals\", \"NBA Finals\", \"NBA Finals\", \"NBA Finals…\n$ gameSubLabel     &lt;chr&gt; \"Game 5\", \"Game 4\", \"Game 3\", \"Game 2\", \"Game 1\", \"Ga…\n$ seriesGameNumber &lt;chr&gt; \"Game 5\", \"Game 4\", \"Game 3\", \"Game 2\", \"Game 1\", \"Ga…\n$ attendance       &lt;dbl&gt; 18984, 19812, 19812, 19014, 18835, 18203, 19066, 1820…\n$ arenaId          &lt;dbl&gt; 1000118, 30, 30, 1000118, 1000118, 1000052, 1000118, …\n$ arenaName        &lt;chr&gt; \"Frost Bank Center\", \"Madison Square Garden\", \"Madiso…\n$ arenaCity        &lt;chr&gt; \"San Antonio\", \"New York\", \"New York\", \"San Antonio\",…\n$ arenaState       &lt;chr&gt; \"TX\", \"NY\", \"NY\", \"TX\", \"TX\", \"OK\", \"TX\", \"OK\", \"OH\",…\n$ officials        &lt;chr&gt; \"James Capers, Scott Foster, Mitchell Ervin, Tyler Fo…\n$ gameDate         &lt;dttm&gt; 2026-06-13 20:30:00, 2026-06-10 20:30:00, 2026-06-08…"
+  },
+  {
+    "objectID": "scores.html#win-location-infographic",
+    "href": "scores.html#win-location-infographic",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "Win Location Infographic",
+    "text": "Win Location Infographic\nBelow is an infographic showing the distribution of team wins by the type of arena (Home Arena, Away Arena, or Neutral Arena).\n\n\n\nHome Arena Wins\n\n\n45,000 (61.4%)\n\n\nHome teams winning on their own court\n\n\n\n\nAway Arena Wins\n\n\n28,027 (38.2%)\n\n\nVisiting teams winning on the road\n\n\n\n\nNeutral Arena Wins\n\n\n252 (0.3%)\n\n\nWins in neutral cities or All-Star settings"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Basketball Insights",
+    "section": "",
+    "text": "This site presents historical basketball game data analysis built with Quarto.\n\nGame score analysis\nDownload the dataset"
+  },
+  {
+    "objectID": "index.html#welcome-to-the-basketball-website",
+    "href": "index.html#welcome-to-the-basketball-website",
+    "title": "Basketball Insights",
+    "section": "",
+    "text": "This site presents historical basketball game data analysis built with Quarto.\n\nGame score analysis\nDownload the dataset"
+  },
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Basketball Insights",
+    "section": "About",
+    "text": "About\nThe project uses a Quarto website structure to make it easy to share interactive reports and visualizations."
+  }
+]

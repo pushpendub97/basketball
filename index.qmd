@@ -1,0 +1,20 @@
+---
+title: Basketball Insights
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    self-contained: true
+---
+
+## Welcome to the Basketball Website
+
+This site presents historical basketball game data analysis built with Quarto.
+
+- [Game score analysis](scores.qmd)
+- [Download the dataset](Games.csv)
+
+## About
+
+The project uses a Quarto website structure to make it easy to share interactive reports and visualizations.

@@ -1,0 +1,41 @@
+name: Publish Quarto website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v3
+        with:
+          version: latest
+
+      - name: Install R dependencies
+        run: |
+          Rscript -e 'if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse", repos="https://cloud.r-project.org")'
+          Rscript -e 'if (!requireNamespace("plotly", quietly = TRUE)) install.packages("plotly", repos="https://cloud.r-project.org")'
+
+      - name: Render Quarto site
+        run: quarto render
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2

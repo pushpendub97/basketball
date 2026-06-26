@@ -18,3 +18,7 @@ This site presents historical basketball game data analysis built with Quarto.
 ## About
 
 The project uses a Quarto website structure to make it easy to share interactive reports and visualizations.
+
+## Publish
+
+This website is configured for GitHub Pages deployment from the `_site/` output folder using GitHub Actions.

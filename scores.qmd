@@ -40,7 +40,7 @@ glimpse(games)
 
 ## Win Location Infographic
 
-Below is an infographic showing the distribution of team wins by the type of arena (Home Arena, Away Arena, or Neutral Arena).
+Below is an infographic showing the distribution of team wins by the type of arena (Home Arena or Away Arena).
 
 ```{r win-analysis}
 # Categorize the win location
@@ -68,46 +68,44 @@ away_wins <- counts %>% filter(win_location == "Away Arena") %>% pull(n)
 neutral_wins <- counts %>% filter(win_location == "Neutral Arena") %>% pull(n)
 ```
 
+<div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: stretch; margin: 30px 0;">
+<div style="flex: 1; min-width: 280px; display: flex; flex-direction: column;">
+
 ```{r render-cards-html}
 #| results: asis
-# Calculate percentages
-total_wins <- home_wins + away_wins + neutral_wins
+# Calculate percentages based on home + away only
+total_wins <- home_wins + away_wins
 home_pct <- (home_wins / total_wins) * 100
 away_pct <- (away_wins / total_wins) * 100
-neutral_pct <- (neutral_wins / total_wins) * 100
 
-# Render a modern, dashboard-style card layout in HTML
 html_cards <- sprintf('
-<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; margin: 30px 0; font-family: system-ui, -apple-system, sans-serif;">
-<div style="flex: 1; min-width: 220px; background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #3498db;">
+<div style="display: flex; flex-direction: column; gap: 20px; font-family: system-ui, -apple-system, sans-serif; height: 100%%;">
+<div style="flex: 1; background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #3498db; display: flex; flex-direction: column; justify-content: center;">
 <h3 style="margin-top: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Home Arena Wins</h3>
-<div style="font-size: 3rem; font-weight: 800; margin: 15px 0; color: #38bdf8;">%s <span style="font-size: 1.5rem; font-weight: 400; color: #94a3b8;">(%s)</span></div>
+<div style="font-size: 3rem; font-weight: 800; margin: 10px 0; color: #38bdf8;">%s <span style="font-size: 1.5rem; font-weight: 400; color: #94a3b8;">(%s wins)</span></div>
 <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">Home teams winning on their own court</p>
 </div>
-<div style="flex: 1; min-width: 220px; background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #2ecc71;">
+<div style="flex: 1; background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #2ecc71; display: flex; flex-direction: column; justify-content: center;">
 <h3 style="margin-top: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Away Arena Wins</h3>
-<div style="font-size: 3rem; font-weight: 800; margin: 15px 0; color: #4ade80;">%s <span style="font-size: 1.5rem; font-weight: 400; color: #94a3b8;">(%s)</span></div>
+<div style="font-size: 3rem; font-weight: 800; margin: 10px 0; color: #4ade80;">%s <span style="font-size: 1.5rem; font-weight: 400; color: #94a3b8;">(%s wins)</span></div>
 <p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">Visiting teams winning on the road</p>
-</div>
-<div style="flex: 1; min-width: 220px; background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #f1c40f;">
-<h3 style="margin-top: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">Neutral Arena Wins</h3>
-<div style="font-size: 3rem; font-weight: 800; margin: 15px 0; color: #facc15;">%s <span style="font-size: 1.5rem; font-weight: 400; color: #94a3b8;">(%s)</span></div>
-<p style="margin: 0; font-size: 0.95rem; color: #cbd5e1;">Wins in neutral cities or All-Star settings</p>
 </div>
 </div>
 ', 
-format(home_wins, big.mark=","), sprintf("%.1f%%", home_pct),
-format(away_wins, big.mark=","), sprintf("%.1f%%", away_pct),
-format(neutral_wins, big.mark=","), sprintf("%.1f%%", neutral_pct))
+sprintf("%.1f%%", home_pct), format(home_wins, big.mark=","),
+sprintf("%.1f%%", away_pct), format(away_wins, big.mark=","))
 
 cat(html_cards)
 ```
 
+</div>
+<div style="flex: 1.2; min-width: 320px; display: flex; flex-direction: column; justify-content: center;">
+
 ```{r render-donut-chart, fig.align='center', fig.width=6, fig.height=4}
 # Prepare data for donut chart
 df_chart <- data.frame(
-  category = c("Home Arena", "Away Arena", "Neutral Arena"),
-  count = c(home_wins, away_wins, neutral_wins)
+  category = c("Home Arena", "Away Arena"),
+  count = c(home_wins, away_wins)
 ) %>%
   mutate(
     percentage = count / sum(count) * 100,
@@ -121,10 +119,10 @@ plot_ly(
   values = ~count,
   type = "pie",
   hole = 0.55,
-  textinfo = "label+percent",
+  textinfo = "none",
   hoverinfo = "text",
-  text = ~paste0(category, ": ", format(count, big.mark = ","), " (", round(percentage, 1), "% )"),
-  marker = list(colors = c("#3498db", "#2ecc71", "#f1c40f"), line = list(color = "#ffffff", width = 2))
+  text = ~paste0(category, ": ", format(count, big.mark = ","), " (", round(percentage, 1), "%)"),
+  marker = list(colors = c("#3498db", "#2ecc71"), line = list(color = "#ffffff", width = 2))
 ) %>%
   layout(
     showlegend = TRUE,
@@ -132,3 +130,195 @@ plot_ly(
     margin = list(l = 10, r = 10, b = 10, t = 10)
   )
 ```
+
+</div>
+</div>
+
+## Basketball Scorigami
+
+A **Scorigami** is a visualization concept (originally popularized by Jon Bois) representing every unique final score combination that has ever occurred in a sport's history. 
+
+In basketball, the home team's score is plotted on the horizontal axis (X-axis) and the visiting team's score is plotted on the vertical axis (Y-axis). Home team wins populate the lower-right triangle (where home score is greater than visiting score), while visiting team wins populate the upper-left triangle.
+
+The interactive heatmap below displays all unique score combinations present in this dataset (outlier games with scores under 50 are filtered out). The color gradient indicates the frequency of each final score on a logarithmic scale.
+
+```{r scorigami-chart}
+# Filter out low-score anomalies and count home/away score combinations
+scorigami_data <- games %>%
+  filter(!is.na(homeScore), !is.na(awayScore)) %>%
+  filter(homeScore >= 50, awayScore >= 50) %>%
+  count(homeScore, awayScore)
+
+# Create a tile plot using ggplot2
+scorigami_plot <- ggplot(scorigami_data, aes(
+  x = homeScore, 
+  y = awayScore, 
+  fill = n, 
+  text = paste0("Score (Home - Away): ", homeScore, " - ", awayScore, "\nGames: ", format(n, big.mark = ","))
+)) +
+  geom_tile(width = 0.9, height = 0.9) +
+  scale_fill_viridis_c(
+    option = "viridis", 
+    trans = "log10", 
+    name = "Games Count"
+  ) +
+  labs(
+    x = "Home Team Score",
+    y = "Visiting Team Score"
+  ) +
+  theme_minimal(base_family = "sans") +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_blank(),
+    legend.position = "right"
+  )
+
+# Convert ggplot to interactive plotly object
+ggplotly(scorigami_plot, tooltip = "text") %>%
+  layout(
+    margin = list(t = 20, r = 10, b = 20, l = 10)
+  )
+```
+
+## Game Margin Distribution
+
+The interactive bar chart below displays the distribution of final score margins (the absolute difference between the home and visiting team scores) across all matches. 
+
+This visualization allows you to see the frequency of matches based on their final margin, highlighting the rarity of blowout games vs. the high occurrence of close finishes.
+
+```{r score-difference-chart}
+# Compute absolute score differences and counts
+clean_games <- games %>%
+  filter(!is.na(homeScore), !is.na(awayScore)) %>%
+  filter(homeScore >= 50, awayScore >= 50) %>%
+  mutate(score_diff = abs(homeScore - awayScore))
+
+mean_diff <- mean(clean_games$score_diff)
+median_diff <- median(clean_games$score_diff)
+
+diff_data <- clean_games %>%
+  count(score_diff)
+
+# Create an interactive bar chart using plotly
+plot_ly(
+  diff_data,
+  x = ~score_diff,
+  y = ~n,
+  type = "bar",
+  marker = list(color = "#3498db", line = list(color = "#2980b9", width = 0.5)),
+  hoverinfo = "text",
+  text = ~paste0("Score Difference: ", score_diff, " pts\nMatches: ", format(n, big.mark = ","))
+) %>%
+  layout(
+    xaxis = list(title = "Absolute Score Difference (Points)"),
+    yaxis = list(title = "Number of Matches"),
+    margin = list(t = 20, r = 10, b = 20, l = 10),
+    shapes = list(
+      list(
+        type = "line",
+        x0 = mean_diff, x1 = mean_diff,
+        y0 = 0, y1 = 1,
+        yref = "paper",
+        line = list(color = "#e74c3c", width = 2, dash = "dash")
+      ),
+      list(
+        type = "line",
+        x0 = median_diff, x1 = median_diff,
+        y0 = 0, y1 = 1,
+        yref = "paper",
+        line = list(color = "#e74c3c", width = 2, dash = "dot")
+      )
+    ),
+    annotations = list(
+      list(
+        x = mean_diff,
+        y = 0.95,
+        yref = "paper",
+        text = paste0("<b>Mean:</b> ", round(mean_diff, 1), " pts"),
+        showarrow = FALSE,
+        xanchor = "left",
+        font = list(color = "#e74c3c")
+      ),
+      list(
+        x = median_diff,
+        y = 0.90,
+        yref = "paper",
+        text = paste0("<b>Median:</b> ", round(median_diff, 1), " pts"),
+        showarrow = FALSE,
+        xanchor = "right",
+        font = list(color = "#e74c3c")
+      )
+    )
+  )
+```
+
+## Relative Score Difference Margin
+
+The interactive histogram below displays the distribution of the relative score difference across all matches, calculated as:
+
+$$\text{Relative Difference} = \frac{|Home\ Score - Visiting\ Score|}{Home\ Score + Visiting\ Score}$$
+
+An appropriate bin size of **0.5%** (`0.005`) was selected using the Freedman-Diaconis rule. This bin size reveals the smooth, right-skewed normal-like distribution of game competitiveness in professional basketball, where the vast majority of games conclude with a relative margin of under 10%.
+
+```{r relative-score-difference-histogram}
+# Compute relative score differences
+rel_diff_data <- games %>%
+  filter(!is.na(homeScore), !is.na(awayScore)) %>%
+  filter(homeScore >= 50, awayScore >= 50) %>%
+  mutate(rel_diff = abs(homeScore - awayScore) / (homeScore + awayScore))
+
+mean_rel <- mean(rel_diff_data$rel_diff)
+median_rel <- median(rel_diff_data$rel_diff)
+
+# Draw plotly histogram with 0.5% (0.005) bins
+plot_ly(
+  rel_diff_data,
+  x = ~rel_diff,
+  type = "histogram",
+  xbins = list(start = 0, end = 0.40, size = 0.005),
+  marker = list(color = "#3498db", line = list(color = "#ffffff", width = 0.5)),
+  hovertemplate = "Relative Difference: %{x}<br>Matches: %{y}<extra></extra>"
+) %>%
+  layout(
+    xaxis = list(title = "Relative Score Difference (Absolute Difference / Total Score)", tickformat = ".1%"),
+    yaxis = list(title = "Number of Matches"),
+    margin = list(t = 20, r = 10, b = 20, l = 10),
+    shapes = list(
+      list(
+        type = "line",
+        x0 = mean_rel, x1 = mean_rel,
+        y0 = 0, y1 = 1,
+        yref = "paper",
+        line = list(color = "#e74c3c", width = 2, dash = "dash")
+      ),
+      list(
+        type = "line",
+        x0 = median_rel, x1 = median_rel,
+        y0 = 0, y1 = 1,
+        yref = "paper",
+        line = list(color = "#e74c3c", width = 2, dash = "dot")
+      )
+    ),
+    annotations = list(
+      list(
+        x = mean_rel,
+        y = 0.95,
+        yref = "paper",
+        text = paste0("<b>Mean:</b> ", round(mean_rel * 100, 2), "%"),
+        showarrow = FALSE,
+        xanchor = "left",
+        font = list(color = "#e74c3c")
+      ),
+      list(
+        x = median_rel,
+        y = 0.90,
+        yref = "paper",
+        text = paste0("<b>Median:</b> ", round(median_rel * 100, 2), "%"),
+        showarrow = FALSE,
+        xanchor = "right",
+        font = list(color = "#e74c3c")
+      )
+    )
+  )
+```
+

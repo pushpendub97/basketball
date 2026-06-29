@@ -4,9 +4,7 @@ author: "Pushpendu Biswas"
 date: today
 format:
   html:
-    theme:
-      light: flatly
-      dark: darkly
+    theme: darkly
     self-contained: true
 execute:
   echo: false

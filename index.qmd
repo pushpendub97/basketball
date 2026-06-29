@@ -2,9 +2,7 @@
 title: Basketball Insights
 format:
   html:
-    theme:
-      light: flatly
-      dark: darkly
+    theme: darkly
     self-contained: true
 ---
 

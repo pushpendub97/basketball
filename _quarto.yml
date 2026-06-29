@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - Games.csv
 
 website:
   title: Basketball Analysis
@@ -15,9 +17,7 @@ website:
 
 format:
   html:
-    theme:
-      light: flatly
-      dark: darkly
+    theme: darkly
     toc: true
     toc-location: left
     self-contained: true

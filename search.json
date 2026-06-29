@@ -18,7 +18,28 @@
     "href": "scores.html#win-location-infographic",
     "title": "Data Loading & Distribution: Historical Basketball Scores",
     "section": "Win Location Infographic",
-    "text": "Win Location Infographic\nBelow is an infographic showing the distribution of team wins by the type of arena (Home Arena, Away Arena, or Neutral Arena).\n\n\n\nHome Arena Wins\n\n\n45,000 (61.4%)\n\n\nHome teams winning on their own court\n\n\n\n\nAway Arena Wins\n\n\n28,027 (38.2%)\n\n\nVisiting teams winning on the road\n\n\n\n\nNeutral Arena Wins\n\n\n252 (0.3%)\n\n\nWins in neutral cities or All-Star settings"
+    "text": "Win Location Infographic\nBelow is an infographic showing the distribution of team wins by the type of arena (Home Arena or Away Arena).\n\n\n\n\n\nHome Arena Wins\n\n\n61.6% (45,000 wins)\n\n\nHome teams winning on their own court\n\n\n\n\nAway Arena Wins\n\n\n38.4% (28,027 wins)\n\n\nVisiting teams winning on the road"
+  },
+  {
+    "objectID": "scores.html#basketball-scorigami",
+    "href": "scores.html#basketball-scorigami",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "Basketball Scorigami",
+    "text": "Basketball Scorigami\nA Scorigami is a visualization concept (originally popularized by Jon Bois) representing every unique final score combination that has ever occurred in a sport’s history.\nIn basketball, the home team’s score is plotted on the horizontal axis (X-axis) and the visiting team’s score is plotted on the vertical axis (Y-axis). Home team wins populate the lower-right triangle (where home score is greater than visiting score), while visiting team wins populate the upper-left triangle.\nThe interactive heatmap below displays all unique score combinations present in this dataset (outlier games with scores under 50 are filtered out). The color gradient indicates the frequency of each final score on a logarithmic scale."
+  },
+  {
+    "objectID": "scores.html#game-margin-distribution",
+    "href": "scores.html#game-margin-distribution",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "Game Margin Distribution",
+    "text": "Game Margin Distribution\nThe interactive bar chart below displays the distribution of final score margins (the absolute difference between the home and visiting team scores) across all matches.\nThis visualization allows you to see the frequency of matches based on their final margin, highlighting the rarity of blowout games vs. the high occurrence of close finishes."
+  },
+  {
+    "objectID": "scores.html#relative-score-difference-margin",
+    "href": "scores.html#relative-score-difference-margin",
+    "title": "Data Loading & Distribution: Historical Basketball Scores",
+    "section": "Relative Score Difference Margin",
+    "text": "Relative Score Difference Margin\nThe interactive histogram below displays the distribution of the relative score difference across all matches, calculated as:\n\\[\\text{Relative Difference} = \\frac{|Home\\ Score - Visiting\\ Score|}{Home\\ Score + Visiting\\ Score}\\]\nAn appropriate bin size of 0.5% (0.005) was selected using the Freedman-Diaconis rule. This bin size reveals the smooth, right-skewed normal-like distribution of game competitiveness in professional basketball, where the vast majority of games conclude with a relative margin of under 10%."
   },
   {
     "objectID": "index.html",
